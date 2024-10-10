@@ -129,23 +129,6 @@ class MainActivity : ComponentActivity() {
                         onLetterSelected = viewModel::onLetterSelected,
                         modifier = Modifier.weight(1f)
                     )
-                    // Hint panel for tablets
-                    if (isTablet()) {
-                        PanelHint(
-                            hintClicks = viewModel.hintClicks,
-                            onHintClicked = {
-                                viewModel.onHintClicked(
-                                    onHintUnavailable = {
-                                        Toast.makeText(context, "Hint not available", Toast.LENGTH_SHORT).show()
-                                    },
-                                    showHintMessage = { message ->
-                                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                                    }
-                                )
-                            },
-                            modifier = Modifier.wrapContentHeight()
-                        )
-                    }
                 }
             }
         }
@@ -258,10 +241,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun isTablet(): Boolean {
-        val configuration = LocalConfiguration.current
-        val screenWidthDp = configuration.screenWidthDp
-        return screenWidthDp >= 600
-    }
 }
